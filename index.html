@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakos Security — Segurança e Serviços | Curitiba, PR</title>
+<meta name="description" content="Soluções completas em segurança, portaria, limpeza e eventos para empresas e condomínios em Curitiba. Equipe treinada, custos reduzidos e cobertura 24 horas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#252528;--bg2:#2c2c31;--bg3:#333338;
+  --off:#f4f2ed;--off2:#e9e6de;
+  --text:#ffffff;--muted:#b8b8be;--muted2:#6e6e76;
+  --dark:#141416;--dark2:#58585f;
+  --border:#35353a;--border-light:#d5d2ca;
+  --accent:#f5c400;
+  --sans:'Inter',system-ui,sans-serif;
+  --display:'DM Sans','Inter',system-ui,sans-serif;
+  --w:min(1200px,100% - 48px);
+  --sec:clamp(80px,10vw,128px);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.wrap{width:var(--w);margin-inline:auto}
+
+/* ── PROGRESS BAR ── */
+#prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:1001;width:0;pointer-events:none}
+
+/* ── IMAGE PLACEHOLDER ── */
+.ph{background:#28282d;background-image:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(255,255,255,.018) 8px,rgba(255,255,255,.018) 16px);display:flex;align-items:center;justify-content:center;color:#42424a;font-size:10px;font-family:monospace;text-align:center;padding:12px;width:100%;height:100%}
+.ph-light{background:#ddd9d0;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:10px;font-family:monospace;text-align:center;padding:12px;width:100%;height:100%}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(28,28,30,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-box{width:32px;height:32px;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.logo-box span{font-size:11px;font-weight:900;color:#000;letter-spacing:.04em}
+.logo-text{font-size:14px;font-weight:700;color:#fff;letter-spacing:.01em}
+.logo-text em{color:var(--muted);font-style:normal;font-weight:400}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.01em;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .25s}
+.nav-links a:hover{color:#fff}.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--accent);color:#000;padding:8px 20px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.03em;transition:opacity .2s;flex-shrink:0}
+.nav-cta:hover{opacity:.85}
+.burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px;flex-shrink:0}
+.burger span{display:block;width:20px;height:1.5px;background:#fff;transition:.3s}
+
+/* ── HERO ── */
+#hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;position:relative;background:linear-gradient(135deg,#2b2b30 0%,#1a1a1f 50%,#111115 100%);overflow:clip}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:140px 48px 120px 48px;position:relative;z-index:1;min-width:0}
+.hero-eyebrow{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;opacity:0;animation:fadeUp .7s .1s forwards}
+.hero-h1{font-size:clamp(38px,4.8vw,68px);font-weight:700;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .7s .3s forwards;font-family:var(--display)}
+.hero-h1 em{color:var(--accent);font-style:normal}
+.hero-sub{font-size:16px;color:var(--muted);width:min(420px,100%);line-height:1.75;margin-bottom:40px;font-weight:400;opacity:0;animation:fadeUp .7s .55s forwards}
+.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .75s forwards}
+.hero-right{position:relative;overflow:hidden;opacity:0;animation:slideIn 1s .2s cubic-bezier(.16,1,.3,1) forwards}
+.hero-stats{position:absolute;bottom:32px;left:max(24px,(100vw - 1200px)/2);z-index:2;display:flex;gap:2px;opacity:0;animation:fadeUp .6s .9s forwards}
+.hstat{background:rgba(28,28,30,.88);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08);padding:16px 24px;min-width:110px}
+.hstat-n{font-size:26px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.03em}
+.hstat-l{font-size:10px;color:var(--muted);letter-spacing:.1em;margin-top:4px;text-transform:uppercase}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{opacity:0;transform:translateX(32px) scale(.97)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABELS ── */
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
+.eyebrow-dark{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
+.slash-label{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:16px;display:block}
+.slash-label::before,.slash-label::after{content:' / ';color:var(--accent)}
+
+/* ── HEADINGS ── */
+h2{font-size:clamp(30px,4vw,54px);font-weight:700;line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:20px;font-family:var(--display)}
+h2.on-light{color:var(--dark)}
+h2 em{color:var(--accent);font-style:normal}
+
+/* ── BTNS ── */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 32px;font-size:13px;font-weight:700;font-family:var(--sans);text-decoration:none;letter-spacing:.04em;cursor:pointer;border:none;transition:opacity .2s,transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-yellow{background:var(--accent);color:#000}.btn-yellow:hover{opacity:.88}
+.btn-dark{background:var(--dark);color:#fff}.btn-dark:hover{opacity:.82}
+.btn-outline{background:transparent;color:#fff;border:1px solid var(--border)}.btn-outline:hover{border-color:#fff}
+.btn-outline-dark{background:transparent;color:var(--dark);border:1px solid var(--border-light)}.btn-outline-dark:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+.btn-arrow{width:40px;height:40px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.btn-arrow:hover{background:#d4aa00}
+.btn-arrow svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ────────────────────────────────────────
+   TRUST / SOBRE RÁPIDO
+──────────────────────────────────────── */
+#trust{padding:var(--sec) 0;border-top:1px solid var(--border);background:linear-gradient(180deg,#111115 0%,#1e1e24 100%)}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.trust-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.trust-photo-big{grid-column:1/-1;height:240px;overflow:hidden;position:relative}
+.trust-photo-sm{height:165px;overflow:hidden;position:relative}
+.trust-body{font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:32px}
+.check-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px}
+.check-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#fff;font-weight:500}
+.check-item::before{content:'';width:16px;height:16px;border:1.5px solid var(--accent);flex-shrink:0;margin-top:2px;background:transparent;position:relative}
+.check-item::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpolyline points='3,8 6.5,11.5 13,5' stroke='%23f5c400' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:contain}
+
+/* ────────────────────────────────────────
+   SERVIÇOS — cards estilo referência
+──────────────────────────────────────── */
+#servicos{padding:var(--sec) 0;background:var(--off);border-top:1px solid var(--border-light)}
+.servicos-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+.servicos-head p{font-size:16px;color:var(--dark2);line-height:1.8;align-self:end}
+
+/* Grid de cards — 2 grandes + 2 médios */
+.serv-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sc{position:relative;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--border-light);background:#fff;transition:box-shadow .3s,transform .3s}
+.sc:hover{box-shadow:0 12px 48px rgba(0,0,0,.12);transform:translateY(-4px)}
+.sc-img{height:280px;position:relative;overflow:hidden;flex-shrink:0}
+.sc-img .ph-light{transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.sc:hover .sc-img .ph-light{transform:scale(1.05)}
+.sc-body{padding:28px 28px 24px;flex:1;display:flex;flex-direction:column}
+.sc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sc-num{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--muted2)}
+.sc-tag{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dark);background:var(--accent);padding:3px 9px}
+.sc h3{font-size:22px;font-weight:800;color:var(--dark);letter-spacing:-.03em;margin-bottom:8px;line-height:1.2}
+.sc-sub{font-size:13px;color:var(--dark2);margin-bottom:24px;line-height:1.6;flex:1}
+.sc-metrics{display:flex;gap:24px;padding:16px 0;border-top:1px solid var(--border-light);margin-bottom:16px}
+.sc-metric{display:flex;flex-direction:column;gap:3px}
+.sc-metric-n{font-size:18px;font-weight:800;color:var(--dark);letter-spacing:-.03em;line-height:1}
+.sc-metric-l{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2)}
+.sc-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sc-link{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dark2)}
+
+/* card escuro (destaque) */
+.sc.dark{background:linear-gradient(160deg,#242428 0%,#2a2a2f 100%);border-color:var(--border)}
+.sc.dark h3{color:#fff}
+.sc.dark .sc-sub{color:var(--muted)}
+.sc.dark .sc-num{color:var(--muted2)}
+.sc.dark .sc-metrics{border-top-color:var(--border)}
+.sc.dark .sc-metric-n{color:#fff}
+.sc.dark .sc-metric-l{color:var(--muted2)}
+.sc.dark .sc-link{color:var(--muted)}
+.sc.dark .btn-arrow{background:var(--accent)}
+.sc.dark .sc-tag{background:var(--accent);color:#000}
+
+/* ────────────────────────────────────────
+   SOBRE
+──────────────────────────────────────── */
+#sobre{padding:var(--sec) 0;border-top:1px solid var(--border);background:linear-gradient(160deg,#2a2a30 0%,#1c1c22 60%,#141418 100%)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.sobre-img{height:500px;overflow:hidden;position:relative}
+.sobre-body p{font-size:16px;color:var(--muted);line-height:1.85;margin-bottom:20px}
+
+/* ────────────────────────────────────────
+   DIFERENCIAIS
+──────────────────────────────────────── */
+#diferenciais{padding:var(--sec) 0;background:var(--off);border-top:1px solid var(--border-light)}
+.dif-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+.dif-head p{font-size:16px;color:var(--dark2);line-height:1.8}
+.dif-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border-light)}
+.dif-card{background:var(--off);padding:44px 40px;position:relative;overflow:hidden;transition:background .25s}
+.dif-card:hover{background:#fff}
+.dif-n{font-size:48px;font-weight:900;color:var(--border-light);line-height:1;margin-bottom:4px;letter-spacing:-.04em;transition:color .25s}
+.dif-card:hover .dif-n{color:var(--off2)}
+.dif-bar{width:28px;height:3px;background:var(--accent);margin-bottom:20px;transition:width .3s}
+.dif-card:hover .dif-bar{width:44px}
+.dif-card h3{font-size:19px;font-weight:700;color:var(--dark);margin-bottom:10px;letter-spacing:-.02em}
+.dif-card p{font-size:15px;color:var(--dark2);line-height:1.75}
+
+/* ────────────────────────────────────────
+   EVENTOS — cards expansíveis
+──────────────────────────────────────── */
+#eventos{padding:var(--sec) 0;border-top:1px solid var(--border);background:linear-gradient(180deg,#141418 0%,#222228 60%,#1a1a20 100%)}
+.eventos-head{margin-bottom:48px}
+.eventos-head p{font-size:16px;color:var(--muted);max-width:580px;line-height:1.8;margin-top:16px}
+
+.ev-list{display:flex;flex-direction:column;gap:2px}
+.ev-item{background:linear-gradient(135deg,#252529 0%,#222226 100%);border:1px solid var(--border);overflow:hidden;transition:border-color .2s}
+.ev-item.open{border-color:var(--accent)}
+.ev-trigger{display:flex;align-items:center;gap:20px;padding:24px 28px;cursor:pointer;user-select:none;transition:background .2s}
+.ev-trigger:hover{background:#2e2e33}
+.ev-item.open .ev-trigger{background:#2e2e33}
+.ev-num{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--muted2);min-width:36px;flex-shrink:0}
+.ev-tag{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;background:var(--bg3);color:var(--muted);padding:3px 8px;flex-shrink:0;transition:background .2s,color .2s}
+.ev-item.open .ev-tag{background:var(--accent);color:#000}
+.ev-title{font-size:17px;font-weight:700;color:#fff;flex:1;letter-spacing:-.02em}
+.ev-chevron{width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.ev-chevron svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ev-item.open .ev-chevron{transform:rotate(180deg)}
+.ev-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1)}
+.ev-body-inner{padding:0 28px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.ev-desc{font-size:15px;color:var(--muted);line-height:1.8}
+.ev-vantagens{display:flex;flex-direction:column;gap:10px}
+.ev-v{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#fff}
+.ev-v-dot{width:6px;height:6px;background:var(--accent);flex-shrink:0;margin-top:7px}
+
+/* ────────────────────────────────────────
+   CONTATO
+──────────────────────────────────────── */
+#contato{padding:var(--sec) 0;background:var(--off);border-top:1px solid var(--border-light)}
+.contato-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contato-left p{font-size:16px;color:var(--dark2);line-height:1.8;margin-bottom:36px}
+.cinfo{display:flex;flex-direction:column;gap:0}
+.cinfo-row{padding:18px 0;border-bottom:1px solid var(--border-light)}
+.cinfo-row:last-child{border:none}
+.cinfo-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.cinfo-val{font-size:15px;color:var(--dark2)}
+.cinfo-val a{color:var(--dark2);text-decoration:none;transition:color .2s}.cinfo-val a:hover{color:var(--dark)}
+.form{display:flex;flex-direction:column;gap:14px;background:#fff;padding:36px;border:1px solid var(--border-light)}
+.fg label{display:block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:6px}
+.fg input,.fg textarea,.fg select{width:100%;background:var(--off);border:1px solid var(--border-light);color:var(--dark);padding:12px 14px;font-family:var(--sans);font-size:14px;outline:none;transition:border-color .2s;border-radius:0;appearance:none;-webkit-appearance:none}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--accent)}
+.fg input::placeholder,.fg textarea::placeholder{color:#aaa}
+.fg textarea{resize:vertical;min-height:100px}
+.fg select option{background:#fff}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-submit{background:var(--accent);color:#000;padding:14px;font-size:13px;font-weight:700;font-family:var(--sans);border:none;cursor:pointer;width:100%;letter-spacing:.06em;text-transform:uppercase;transition:opacity .2s}
+.btn-submit:hover{opacity:.85}
+
+/* ────────────────────────────────────────
+   FOOTER
+──────────────────────────────────────── */
+footer{background:linear-gradient(180deg,#1a1a20 0%,#0e0e12 100%);border-top:1px solid var(--border);padding:56px 0 28px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:44px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.foot-brand .logo{margin-bottom:14px}
+.foot-brand p{font-size:13px;color:var(--muted);line-height:1.75;max-width:240px}
+.foot-col h4{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col a,.foot-col p{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;line-height:1.7}
+.foot-col a:hover{color:#fff}
+.foot-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot-copy{font-size:12px;color:var(--muted2)}
+
+/* ────────────────────────────────────────
+   WHATSAPP FLOAT
+──────────────────────────────────────── */
+.wa-float{position:fixed;bottom:32px;right:32px;width:52px;height:52px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.35);z-index:200;transition:transform .2s,box-shadow .2s}
+.wa-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.55)}
+.wa-float svg{width:26px;height:26px;fill:#fff}
+@media(min-width:1200px){.wa-float{bottom:40px;right:40px}}
+
+/* ────────────────────────────────────────
+   SCROLL ANIMATIONS
+──────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-28px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.32s}.d4{transition-delay:.46s}.d5{transition-delay:.62s}
+
+/* Line reveal */
+.lreveal .line-wrap{overflow:hidden;display:block}
+.lreveal .line-inner{display:block;transform:translateY(110%);transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.lreveal.visible .line-inner{transform:none}
+
+/* Curtain wipe */
+.curtain{position:relative;overflow:hidden}
+.curtain::after{content:'';position:absolute;inset:0;background:var(--bg);transform:scaleY(1);transform-origin:top;transition:transform 1s cubic-bezier(.77,0,.175,1);z-index:2;pointer-events:none}
+.curtain.light-curtain::after{background:var(--off)}
+.curtain.visible::after{transform:scaleY(0);transform-origin:bottom}
+
+/* ────────────────────────────────────────
+   RESPONSIVE
+──────────────────────────────────────── */
+
+/* ── TABLET LARGO ── */
+@media(max-width:1100px){
+  .hero-left{padding:140px 40px 120px 40px}
+  .serv-cards{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .dif-head{grid-template-columns:1fr}
+  .servicos-head{grid-template-columns:1fr}
+  .sobre-grid{gap:48px}
+  .trust-grid{gap:48px}
+}
+
+/* ── TABLET ── */
+@media(max-width:840px){
+  /* Hero: stack vertical */
+  #hero{grid-template-columns:1fr;display:flex;flex-direction:column;min-height:auto}
+  .hero-left{padding:96px 40px 36px;order:1;width:100%}
+  .hero-h1{font-size:clamp(36px,5.5vw,52px)}
+  .hero-sub{max-width:540px;font-size:15px}
+  .hero-right{height:320px;order:2;width:100%;opacity:1;transform:none;animation:none}
+  .hero-right img{height:320px!important;min-height:unset!important}
+  .hero-stats{position:relative;inset:auto;order:3;flex-direction:row;flex-wrap:nowrap;gap:0;padding:0 0 36px;opacity:1;animation:none;margin:0 40px}
+  .hstat{flex:1;min-width:0}
+
+  /* Layout grids */
+  .trust-grid,.sobre-grid,.contato-grid{grid-template-columns:1fr;gap:40px}
+  .sobre-grid .sobre-img{order:2}
+  .sobre-grid .sobre-body{order:1}
+  .sobre-img{height:320px!important}
+  .sobre-img img{height:320px!important}
+  .check-list{grid-template-columns:1fr 1fr}
+  .dif-grid{grid-template-columns:1fr 1fr}
+  .ev-body-inner{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .serv-cards{grid-template-columns:1fr 1fr}
+  .servicos-head{grid-template-columns:1fr}
+  .dif-head{grid-template-columns:1fr}
+  .sc-body{padding:22px 22px 18px}
+}
+
+/* ── MOBILE ── */
+@media(max-width:600px){
+  /* Nav */
+  .nav-links,.nav-cta{display:none}
+  .burger{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:rgba(20,20,22,.98);align-items:center;justify-content:center;gap:32px;z-index:99}
+  .nav-links.open a{font-size:20px;color:#fff}
+  .nav-links.open .nav-mob-cta{display:inline-block!important;background:var(--accent);color:#000;padding:12px 32px;font-size:15px;font-weight:700;text-decoration:none}
+
+  /* Hero mobile — foto de fundo com overlay, texto por cima */
+  #hero{display:block;position:relative;min-height:100svh;background:none;overflow:hidden}
+  .hero-right{position:absolute;inset:0;width:100%;height:100%;order:unset;animation:none;opacity:1;transform:none}
+  .hero-right img{width:100%!important;height:100%!important;object-fit:cover;object-position:center top;min-height:unset!important}
+  .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,.72) 0%,rgba(10,10,12,.55) 40%,rgba(10,10,12,.82) 100%)}
+  .hero-left{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 110px;width:100%;min-height:100svh}
+  .hero-h1{font-size:clamp(32px,8.5vw,44px);text-shadow:0 2px 12px rgba(0,0,0,.4)}
+  .hero-sub{font-size:14px;max-width:100%;line-height:1.65;color:rgba(255,255,255,.82)}
+  .hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:2;flex-direction:row;flex-wrap:nowrap;gap:0;padding:0;margin:0;opacity:1;animation:none;background:rgba(10,10,12,.7);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08)}
+  .hstat{flex:1;min-width:0;padding:14px 10px;background:none;border:none;backdrop-filter:none}
+  .hstat-n{font-size:18px}
+  .hstat-l{font-size:8px}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:10px}
+  .hero-actions .btn{width:100%;justify-content:center;padding:13px 24px}
+
+  /* Trust */
+  .trust-photo-big{height:190px!important}
+  .trust-photo-big img{height:190px!important}
+  .trust-photo-sm{height:130px!important}
+  .trust-photo-sm img{height:130px!important}
+
+  /* Serviços */
+  .serv-cards{grid-template-columns:1fr}
+  .sc-img{height:190px}
+  .sc-img img{height:190px!important}
+  .sc-body{padding:22px 20px 18px}
+  .sc h3{font-size:18px}
+  .sc-metrics{gap:16px}
+
+  /* Checks & Difs */
+  .check-list{grid-template-columns:1fr}
+  .dif-grid{grid-template-columns:1fr}
+  .dif-card{padding:28px 20px}
+
+  /* Eventos */
+  .ev-trigger{padding:16px 14px;gap:8px}
+  .ev-num{display:none}
+  .ev-title{font-size:14px}
+  .ev-body-inner{padding:0 14px 20px;gap:16px}
+
+  /* Contato */
+  .frow{grid-template-columns:1fr}
+  .form{padding:20px}
+  .contato-grid{gap:32px}
+
+  /* Footer */
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  .foot-bottom{flex-direction:column;text-align:center;gap:8px}
+
+  /* WhatsApp float — menor e mais discreto no mobile */
+  .wa-float{width:46px;height:46px;bottom:20px;right:16px}
+  .wa-float svg{width:22px;height:22px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,.reveal-left,.reveal-right,.lreveal .line-inner,.curtain::after{transition:none!important;animation:none!important;opacity:1!important;transform:none!important}
+  .hero-eyebrow,.hero-h1,.hero-sub,.hero-actions,.hero-right,.hero-stats{animation:none!important;opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ══ NAV ══ -->
+<nav id="main-nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-box"><span>BS</span></div>
+        <span class="logo-text">Bakos <em>Security</em></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#eventos">Eventos</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="#contato" class="nav-mob-cta" style="display:none">Solicitar orçamento</a></li>
+      </ul>
+      <a href="#contato" class="nav-cta">Orçamento</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">Segurança e Serviços · Curitiba, PR</span>
+    <h1 class="hero-h1">Proteção que você<br>pode <em>confiar</em> —<br>24 horas.</h1>
+    <p class="hero-sub">Portaria, segurança patrimonial, limpeza e suporte a eventos. Equipe treinada, gestão terceirizada e cobertura contínua para empresas e condomínios.</p>
+    <div class="hero-actions">
+      <a href="#contato" class="btn btn-yellow">Solicitar orçamento</a>
+      <a href="#servicos" class="btn btn-outline">Ver serviços</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="tire_o_APEX_security_de_202606091142.jpeg" alt="Profissional Bakos Security" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;min-height:100vh">
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">24h</div><div class="hstat-l">Cobertura contínua</div></div>
+    <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l">Equipe treinada</div></div>
+    <div class="hstat"><div class="hstat-n">≤48h</div><div class="hstat-l">Resposta ao orçamento</div></div>
+  </div>
+</section>
+
+<!-- ══ TRUST ══ -->
+<section id="trust">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div>
+        <div class="trust-photo-big curtain reveal">
+          <img src="remova_a_logo_atual_,_202606091607.jpeg" alt="Equipe Bakos Security em operação" style="width:100%;height:240px;object-fit:cover;object-position:center;display:block">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div class="trust-photo-sm curtain reveal d1">
+            <img src="remova_aquele__Event_Security__Da_202606091559.jpeg" alt="Equipe em evento" style="width:100%;height:165px;object-fit:cover;display:block">
+          </div>
+          <div class="trust-photo-sm curtain reveal d2">
+            <img src="foto_atendente_bakos.jpeg" alt="Recepcionista Bakos" style="width:100%;height:165px;object-fit:cover;display:block">
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow reveal">Proteção consistente</span>
+        <h2 class="lreveal"><span class="line-wrap"><span class="line-inner">Mais de uma década</span></span><span class="line-wrap"><span class="line-inner">cuidando do que</span></span><span class="line-wrap"><span class="line-inner">importa pra você.</span></span></h2>
+        <p class="trust-body reveal d1">A Bakos Security nasceu com um objetivo claro: oferecer serviços de segurança e conservação com o mesmo cuidado que você teria com seu próprio negócio. Trabalhamos com equipes treinadas, uniformizadas e comprometidas com os resultados do cliente.</p>
+        <div class="check-list reveal d2">
+          <div class="check-item">Equipe treinada e uniformizada</div>
+          <div class="check-item">Cobertura 24 horas</div>
+          <div class="check-item">Substituição rápida em ausências</div>
+          <div class="check-item">Gestão 100% terceirizada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVIÇOS ══ -->
+<section id="servicos">
+  <div class="wrap">
+    <div class="servicos-head">
+      <div>
+        <span class="eyebrow-dark reveal">Nossos serviços</span>
+        <h2 class="on-light lreveal"><span class="line-wrap"><span class="line-inner">Soluções completas</span></span><span class="line-wrap"><span class="line-inner">para cada <em>necessidade</em></span></span></h2>
+      </div>
+      <p class="reveal d1">Do controle de acesso à limpeza de ambientes — serviços terceirizados com qualidade, eficiência e custo acessível para condomínios, empresas e indústrias.</p>
+    </div>
+    <div class="serv-cards">
+
+      <!-- Portaria -->
+      <div class="sc reveal">
+        <div class="sc-img curtain light-curtain">
+          <img src="portaria24hrs.jpeg" alt="Portaria Bakos Security" style="width:100%;height:280px;object-fit:cover;object-position:center 20%;display:block">
+        </div>
+        <div class="sc-body">
+          <div class="sc-top">
+            <span class="sc-num">01 / 04</span>
+            <span class="sc-tag">Portaria</span>
+          </div>
+          <h3>Portaria 24 horas</h3>
+          <p class="sc-sub">Controle da circulação de pessoas e veículos com profissionais treinados — reduzindo custos sem abrir mão da segurança do seu condomínio ou empresa.</p>
+          <div class="sc-metrics">
+            <div class="sc-metric"><span class="sc-metric-n">24h</span><span class="sc-metric-l">Cobertura</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">100%</span><span class="sc-metric-l">Treinado</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">≤24h</span><span class="sc-metric-l">Substituição</span></div>
+          </div>
+          <div class="sc-footer">
+            <span class="sc-link">Solicitar orçamento</span>
+            <a href="#contato" class="btn-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segurança Patrimonial — dark -->
+      <div class="sc dark reveal d1">
+        <div class="sc-img curtain">
+          <img src="seguranca_patrimonial.png" alt="Segurança Patrimonial Bakos" style="width:100%;height:280px;object-fit:cover;object-position:center;display:block">
+        </div>
+        <div class="sc-body">
+          <div class="sc-top">
+            <span class="sc-num">02 / 04</span>
+            <span class="sc-tag">Segurança</span>
+          </div>
+          <h3>Segurança Patrimonial</h3>
+          <p class="sc-sub">Vigilância ativa do patrimônio com controle de acesso e monitoramento. Soluções customizadas para prevenir perdas e garantir a proteção do seu negócio.</p>
+          <div class="sc-metrics">
+            <div class="sc-metric"><span class="sc-metric-n">Ativo</span><span class="sc-metric-l">Monitoramento</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Zero</span><span class="sc-metric-l">Burocracia</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Custom</span><span class="sc-metric-l">Solução</span></div>
+          </div>
+          <div class="sc-footer">
+            <span class="sc-link">Solicitar orçamento</span>
+            <a href="#contato" class="btn-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Limpeza -->
+      <div class="sc reveal d2">
+        <div class="sc-img curtain light-curtain">
+          <img src="limpeza_conservacao.png" alt="Limpeza e Conservação Bakos" style="width:100%;height:280px;object-fit:cover;object-position:center;display:block">
+        </div>
+        <div class="sc-body">
+          <div class="sc-top">
+            <span class="sc-num">03 / 04</span>
+            <span class="sc-tag">Limpeza</span>
+          </div>
+          <h3>Limpeza e Conservação</h3>
+          <p class="sc-sub">Equipe capacitada, produtos adequados e equipamentos modernos para manter condomínios, indústrias, shoppings, hotéis e ambientes corporativos impecáveis.</p>
+          <div class="sc-metrics">
+            <div class="sc-metric"><span class="sc-metric-n">Diária</span><span class="sc-metric-l">Frequência</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Multi</span><span class="sc-metric-l">Ambientes</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Eco</span><span class="sc-metric-l">Produtos</span></div>
+          </div>
+          <div class="sc-footer">
+            <span class="sc-link">Solicitar orçamento</span>
+            <a href="#contato" class="btn-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Eventos — dark -->
+      <div class="sc dark reveal d3">
+        <div class="sc-img curtain">
+          <img src="PARAEVENTOS.jpeg" alt="Suporte para Eventos Bakos" style="width:100%;height:280px;object-fit:cover;object-position:center top;display:block">
+        </div>
+        <div class="sc-body">
+          <div class="sc-top">
+            <span class="sc-num">04 / 04</span>
+            <span class="sc-tag">Eventos</span>
+          </div>
+          <h3>Suporte para Eventos</h3>
+          <p class="sc-sub">Equipes especializadas em recepção, portaria, controle de acesso, limpeza, manobristas e staff — para que seu evento aconteça sem imprevistos.</p>
+          <div class="sc-metrics">
+            <div class="sc-metric"><span class="sc-metric-n">5</span><span class="sc-metric-l">Especialidades</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Full</span><span class="sc-metric-l">Operação</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Flex</span><span class="sc-metric-l">Equipe</span></div>
+          </div>
+          <div class="sc-footer">
+            <span class="sc-link">Solicitar orçamento</span>
+            <a href="#contato" class="btn-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOBRE ══ -->
+<section id="sobre">
+  <div class="wrap">
+    <div class="sobre-grid">
+      <div class="sobre-img curtain reveal-left">
+        <img src="remova_aquele__Event_Security__Da_202606091559.jpeg" alt="Equipe Bakos Security" style="width:100%;height:500px;object-fit:cover;object-position:center top;display:block">
+      </div>
+      <div class="sobre-body">
+        <span class="eyebrow reveal">Nossa história</span>
+        <h2 class="lreveal"><span class="line-wrap"><span class="line-inner">Comprometidos com</span></span><span class="line-wrap"><span class="line-inner">a sua tranquilidade.</span></span></h2>
+        <p class="reveal d1">A Bakos Security foi fundada com a missão de oferecer soluções de segurança, limpeza e serviços terceirizados de alta qualidade para empresas, condomínios e eventos em Curitiba e região. Construímos uma reputação baseada em confiança, comprometimento e resultados reais.</p>
+        <p class="reveal d2">Nossa equipe passa por treinamento especializado contínuo, garantindo que cada profissional esteja preparado para as situações do dia a dia — desde o controle de uma portaria até a operação em grandes eventos. Quando você nos contrata, você contrata uma parceria.</p>
+        <a href="#contato" class="btn btn-yellow reveal d3" style="margin-top:8px">Falar com a equipe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DIFERENCIAIS ══ -->
+<section id="diferenciais">
+  <div class="wrap">
+    <div class="dif-head">
+      <div>
+        <span class="eyebrow-dark reveal">Por que nos escolher</span>
+        <h2 class="on-light lreveal"><span class="line-wrap"><span class="line-inner">Vantagens reais de trabalhar</span></span><span class="line-wrap"><span class="line-inner">com quem é <em>especialista</em>.</span></span></h2>
+      </div>
+      <p class="reveal d1">Ao terceirizar com a Bakos, você elimina custos ocultos, burocracia trabalhista e a preocupação com gestão de pessoas — e ainda garante mais qualidade.</p>
+    </div>
+    <div class="dif-grid">
+      <div class="dif-card reveal">
+        <div class="dif-n">01</div>
+        <div class="dif-bar"></div>
+        <h3>Redução de custos</h3>
+        <p>Contratar via Bakos Security é geralmente mais econômico que funcionários próprios. Assumimos encargos trabalhistas, treinamento e gestão — você paga menos e recebe mais.</p>
+      </div>
+      <div class="dif-card reveal d1">
+        <div class="dif-n">02</div>
+        <div class="dif-bar"></div>
+        <h3>Profissionais treinados</h3>
+        <p>Todos os colaboradores passam por treinamento especializado e atualização constante. Preparados para lidar com situações de portarias, condomínios, empresas e eventos.</p>
+      </div>
+      <div class="dif-card reveal d2">
+        <div class="dif-n">03</div>
+        <div class="dif-bar"></div>
+        <h3>Gestão sem dor de cabeça</h3>
+        <p>Você delega a gestão do pessoal para nós e foca no que importa. Sem preocupações com folha de pagamento, ausências ou burocracia trabalhista.</p>
+      </div>
+      <div class="dif-card reveal d3">
+        <div class="dif-n">04</div>
+        <div class="dif-bar"></div>
+        <h3>Substituição imediata</h3>
+        <p>Em afastamentos, férias ou demissão, substituímos o profissional rapidamente, garantindo que o serviço não seja interrompido e sua operação continue sem falhas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EVENTOS ══ -->
+<section id="eventos">
+  <div class="wrap">
+    <div class="eventos-head">
+      <span class="eyebrow reveal">Suporte completo para eventos</span>
+      <h2 class="lreveal"><span class="line-wrap"><span class="line-inner">Tudo que seu evento precisa,</span></span><span class="line-wrap"><span class="line-inner">numa única empresa.</span></span></h2>
+      <p class="reveal d1">Da entrada ao estacionamento — disponibilizamos equipes para todas as funções. Você foca no evento, nós cuidamos da operação.</p>
+    </div>
+    <div class="ev-list reveal d2" id="ev-list">
+
+      <!-- Recepção -->
+      <div class="ev-item" data-ev="0">
+        <div class="ev-trigger">
+          <span class="ev-num">01 / 05</span>
+          <span class="ev-tag">Recepção</span>
+          <span class="ev-title">Recepcionista e Telefonista</span>
+          <div class="ev-chevron"><svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-body-inner">
+            <p class="ev-desc">Recepcionistas e telefonistas treinados, com uniformes especiais que conferem elegância e excelente resultado visual às atividades. Disponibilizamos pessoal treinado e acompanhamento constante, objetivando garantir os resultados esperados por sua empresa.</p>
+            <div class="ev-vantagens">
+              <div class="ev-v"><div class="ev-v-dot"></div>Pessoal treinado e uniformizado</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Acompanhamento constante das atividades</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Custo menor que contratação direta</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Substituição rápida em ausências</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controle de Acesso -->
+      <div class="ev-item" data-ev="1">
+        <div class="ev-trigger">
+          <span class="ev-num">02 / 05</span>
+          <span class="ev-tag">Segurança</span>
+          <span class="ev-title">Controle de Acesso</span>
+          <div class="ev-chevron"><svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-body-inner">
+            <p class="ev-desc">Fiscalização rigorosa da entrada e saída de pessoas e veículos, com monitoramento e resposta rápida a irregularidades. Profissionais treinados para manter a ordem sem comprometer a experiência dos convidados.</p>
+            <div class="ev-vantagens">
+              <div class="ev-v"><div class="ev-v-dot"></div>Monitoramento via circuito</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Resposta imediata a irregularidades</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Controle de credenciamento</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Profissionais capacitados e uniformizados</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Limpeza Evento -->
+      <div class="ev-item" data-ev="2">
+        <div class="ev-trigger">
+          <span class="ev-num">03 / 05</span>
+          <span class="ev-tag">Limpeza</span>
+          <span class="ev-title">Limpeza para Eventos</span>
+          <div class="ev-chevron"><svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-body-inner">
+            <p class="ev-desc">Equipe dedicada à conservação e limpeza do espaço antes, durante e após o evento. Garantimos higiene e boa apresentação em todos os momentos, com produtos adequados e profissionais experientes.</p>
+            <div class="ev-vantagens">
+              <div class="ev-v"><div class="ev-v-dot"></div>Limpeza antes, durante e após o evento</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Produtos e equipamentos modernos</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Equipe flexível por porte do evento</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Descarte e organização pós-evento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manobrista -->
+      <div class="ev-item" data-ev="3">
+        <div class="ev-trigger">
+          <span class="ev-num">04 / 05</span>
+          <span class="ev-tag">Operação</span>
+          <span class="ev-title">Estacionamento / Manobrista</span>
+          <div class="ev-chevron"><svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-body-inner">
+            <p class="ev-desc">Profissionais habilitados e experientes para efetuar manobras nos menores espaços, com total zelo pelo veículo. Oferecemos um serviço personalizado e de ótima qualidade, transmitindo confiança e elegância ao seu evento.</p>
+            <div class="ev-vantagens">
+              <div class="ev-v"><div class="ev-v-dot"></div>Habilitados e com experiência comprovada</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Total zelo pelo veículo do convidado</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Serviço personalizado e uniformizado</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Escalável por número de vagas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staff -->
+      <div class="ev-item" data-ev="4">
+        <div class="ev-trigger">
+          <span class="ev-num">05 / 05</span>
+          <span class="ev-tag">Staff</span>
+          <span class="ev-title">Staff, Carregadores e Promotores</span>
+          <div class="ev-chevron"><svg viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg></div>
+        </div>
+        <div class="ev-body">
+          <div class="ev-body-inner">
+            <p class="ev-desc">Carregadores, staff operacional e promotores para apoiar a logística do evento do início ao fim. Equipes ágeis e comprometidas que se adaptam ao ritmo e ao formato de cada produção.</p>
+            <div class="ev-vantagens">
+              <div class="ev-v"><div class="ev-v-dot"></div>Carregadores e montagem de estrutura</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Staff operacional e de apoio</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Promotores e hostess</div>
+              <div class="ev-v"><div class="ev-v-dot"></div>Equipe dimensionada ao evento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTATO ══ -->
+<section id="contato">
+  <div class="wrap">
+    <div class="contato-grid">
+      <div class="contato-left">
+        <span class="eyebrow-dark reveal">Fale conosco</span>
+        <h2 class="on-light lreveal"><span class="line-wrap"><span class="line-inner">Solicite um</span></span><span class="line-wrap"><span class="line-inner">orçamento gratuito</span></span></h2>
+        <p class="reveal d1">Preencha o formulário ou fale diretamente pelo WhatsApp. Nossa equipe responde em até 48 horas úteis, sem compromisso.</p>
+        <div class="cinfo reveal d2">
+          <div class="cinfo-row">
+            <div class="cinfo-label">Telefone / WhatsApp</div>
+            <div class="cinfo-val"><a href="https://wa.me/5541997444276">(41) 99744-4276</a></div>
+          </div>
+          <div class="cinfo-row">
+            <div class="cinfo-label">Localização</div>
+            <div class="cinfo-val">Curitiba, PR · Brasil</div>
+          </div>
+          <div class="cinfo-row">
+            <div class="cinfo-label">Horário de atendimento</div>
+            <div class="cinfo-val">Segunda a Sexta, 8h–18h<br>Emergências: 24 horas</div>
+          </div>
+          <div class="cinfo-row">
+            <div class="cinfo-label">Serviços</div>
+            <div class="cinfo-val">Portaria · Segurança · Limpeza · Eventos</div>
+          </div>
+        </div>
+      </div>
+      <form class="form reveal d2" onsubmit="return false;">
+        <div class="frow">
+          <div class="fg"><label>Nome</label><input type="text" placeholder="Seu nome completo"></div>
+          <div class="fg"><label>Telefone</label><input type="tel" placeholder="(41) 9 0000-0000"></div>
+        </div>
+        <div class="fg"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+        <div class="fg"><label>Empresa / Condomínio</label><input type="text" placeholder="Nome da empresa ou condomínio (opcional)"></div>
+        <div class="fg">
+          <label>Serviço de interesse</label>
+          <select>
+            <option value="">Selecione o serviço...</option>
+            <option>Portaria 24 horas</option>
+            <option>Segurança Patrimonial</option>
+            <option>Limpeza e Conservação</option>
+            <option>Suporte para Eventos</option>
+            <option>Mais de um serviço</option>
+          </select>
+        </div>
+        <div class="fg"><label>Mensagem</label><textarea placeholder="Descreva sua necessidade — tipo de local, quantidade de pessoas, frequência..."></textarea></div>
+        <button type="submit" class="btn-submit">Enviar mensagem →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo"><div class="logo-box"><span>BS</span></div><span class="logo-text">Bakos <em>Security</em></span></a>
+        <p>Segurança, limpeza e serviços terceirizados para empresas, condomínios e eventos em Curitiba, PR.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#">Início</a></li>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#eventos">Eventos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#servicos">Portaria 24 horas</a></li>
+          <li><a href="#servicos">Segurança Patrimonial</a></li>
+          <li><a href="#servicos">Limpeza e Conservação</a></li>
+          <li><a href="#eventos">Suporte para Eventos</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contato</h4>
+        <p>Curitiba, PR · Brasil</p>
+        <p style="margin-top:8px"><a href="https://wa.me/5541997444276">(41) 99744-4276</a><br>WhatsApp disponível</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2026 Bakos Security. Todos os direitos reservados.</p>
+      <p class="foot-copy">Curitiba, PR · Brasil</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ WHATSAPP FLUTUANTE ══ -->
+<a href="https://wa.me/5541997444276" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ── PROGRESS ──
+const prog = document.getElementById('prog');
+window.addEventListener('scroll',()=>{
+  prog.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+},{passive:true});
+
+// ── NAV SCROLL ──
+const mainNav = document.getElementById('main-nav');
+window.addEventListener('scroll',()=>mainNav.classList.toggle('scrolled',scrollY>50),{passive:true});
+
+// ── MOBILE MENU ──
+const burger=document.getElementById('burger'),navLinks=document.getElementById('nav-links');
+burger.addEventListener('click',()=>{
+  const o=navLinks.classList.toggle('open');
+  const [a,b,c]=burger.querySelectorAll('span');
+  a.style.transform=o?'rotate(45deg) translate(4.5px,4.5px)':'';
+  b.style.opacity=o?'0':'1';
+  c.style.transform=o?'rotate(-45deg) translate(4.5px,-4.5px)':'';
+  document.body.style.overflow=o?'hidden':'';
+});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navLinks.classList.remove('open');
+  burger.querySelectorAll('span').forEach(s=>{s.style.transform='';s.style.opacity='1';});
+  document.body.style.overflow='';
+}));
+
+// ── SCROLL REVEAL ──
+(function(){
+  const allReveal = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.lreveal,.curtain');
+
+  // Prep line-reveal elements
+  document.querySelectorAll('.lreveal').forEach(el=>{
+    el.querySelectorAll('.line-inner').forEach((li,i)=>{
+      li.style.transitionDelay=(80+i*100)+'ms';
+    });
+  });
+
+  function activate(el){
+    el.classList.add('visible');
+  }
+
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      activate(e.target);
+      obs.unobserve(e.target);
+    });
+  },{threshold:.08,rootMargin:'0px 0px -32px 0px'});
+
+  allReveal.forEach(el=>obs.observe(el));
+
+  // Fallback: reveal elements already in viewport on load
+  function revealVisible(){
+    allReveal.forEach(el=>{
+      const r=el.getBoundingClientRect();
+      if(r.top < window.innerHeight + 60) activate(el);
+    });
+  }
+  window.addEventListener('load', revealVisible);
+  setTimeout(revealVisible, 120);
+})();
+
+// ── EVENTOS ACCORDION ──
+document.querySelectorAll('.ev-trigger').forEach(trigger=>{
+  trigger.addEventListener('click',()=>{
+    const item=trigger.closest('.ev-item');
+    const body=item.querySelector('.ev-body');
+    const isOpen=item.classList.contains('open');
+    // fechar todos
+    document.querySelectorAll('.ev-item.open').forEach(openItem=>{
+      openItem.classList.remove('open');
+      openItem.querySelector('.ev-body').style.maxHeight='0';
+    });
+    // abrir clicado se estava fechado
+    if(!isOpen){
+      item.classList.add('open');
+      body.style.maxHeight=body.scrollHeight+64+'px';
+    }
+  });
+});
+
+// ── HERO PARALLAX ──
+const heroRight = document.querySelector('.hero-right');
+window.addEventListener('scroll',()=>{
+  if(scrollY < innerHeight*1.2 && heroRight){
+    heroRight.style.transform=`translateY(${scrollY*.1}px)`;
+  }
+},{passive:true});
+</script>
+</body>
+</html>
