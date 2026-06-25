@@ -265,3 +265,61 @@
 - **Página de orçamento** retorna 404 — provavelmente está offline ou com URL diferente.
 - **Recepção (eventos):** conteúdo adicionado manualmente via print do cliente.
 - **Limpeza (eventos):** retornou o mesmo conteúdo da página de Limpeza e Conservação geral — pode ser a mesma página ou ter conteúdo específico não acessado.
+
+
+
+
+# ADIÇÃO — Novas Categorias de Serviço
+
+> Conteúdo para adicionar ao conteudo.md existente, no mesmo padrão do documento original (## Páginas de Serviço).
+
+---
+
+## Páginas de Serviço (adição)
+
+### Cursos e Treinamentos
+
+**Título:** Cursos e Treinamentos
+
+**Introdução:**
+> "Ajudar sua empresa a cumprir as normas regulamentadoras e promover um ambiente seguro e saudável aos seus colaboradores."
+
+**Lista de cursos:**
+
+1. **NR23** — Brigada de Incêndio
+2. **NR17** — Ergonomia
+3. **NR20** — Líquidos Inflamáveis e Combustíveis
+4. **NR33** — Espaços Confinados
+5. **NR35** — Trabalho em Altura
+6. **Palestras sobre CIPA** — segurança industrial, doméstica e no trânsito
+7. **Adequação a NR01** — riscos psicossociais
+8. **Lei 13.722** — primeiros socorros para professores e interessados
+9. **Amônia** — segurança e emergência
+10. **EPR** — Equipamento de Proteção Respiratória
+11. **Gás Cloro** — condições seguras de manuseio
+12. **Liderança e Gestão de Pessoas**
+
+**Vantagens:**
+*(pendente — a definir com o cliente)*
+
+---
+
+### Investigação e Inteligência
+
+**Título:** Investigação e Inteligência
+
+**Lista de serviços:**
+
+1. **Investigação de Sinistros** — apuração de sinistros e problemas internos da empresa
+2. **Dossiê para Cargos de Confiança** — levantamento para contratação de posições estratégicas
+3. **Gestão de Risco e Compliance** — estruturação de processos de gestão de risco corporativo
+
+**Vantagens:**
+*(pendente — a definir com o cliente)*
+
+---
+
+## Observações
+
+- Categorias novas — não existiam no site antigo nem na lista de navegação original.
+- Sem as 4 vantagens padrão (Redução de custos / Segurança / Gestão de pessoal / Substituição) — não se aplicam bem aqui e o documento original já criticava essa repetição.
