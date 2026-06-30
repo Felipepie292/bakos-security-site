@@ -50,14 +50,16 @@ Projeto é **HTML/CSS/JS puro** (arquivo único `index.html`), single-page com n
 ## Estrutura de Seções (ordem no HTML)
 
 1. **Nav** — logo, links âncora, CTA "Orçamento", burger mobile
-2. **Hero** — headline forte + subtítulo + CTA → placeholder para foto-hero.jpg
-3. **Trust / Sobre** — grid 2 colunas: fotos equipe + texto com diferenciais em checkboxes
-4. **Serviços** — fundo `var(--bg2)` (escuro), grid de cards com foto + label hover
-5. **Eventos** — fundo **off-white** (`#f5f4f0`), cards dos 5 sub-serviços para eventos
-6. **Nossa História / Sobre** — fundo escuro, texto 2 colunas + foto
-7. **Diferenciais** — fundo `var(--bg2)` (escuro), 4 cards numerados
-8. **Contato** — fundo **off-white** (`#f5f4f0`), grid: info contato + formulário
-9. **Footer** — fundo escuro
+2. **Hero** — headline forte + subtítulo + CTA → foto hero
+3. **Clientes (esteira)** — marquee infinito logo abaixo do hero, fundo escuro com borda. Por ora nomes em texto; substituir por logos quando disponíveis. ID: `#clientes`
+4. **Trust / Sobre** — grid 2 colunas: fotos equipe + texto com diferenciais em checkboxes
+5. **Serviços** — fundo off-white, grid 2x2 de cards com foto
+6. **Nossa História / Sobre** — fundo escuro, texto 2 colunas + foto (`quemsomos.jpeg`)
+7. **Diferenciais** — fundo off-white, 4 cards numerados
+8. **Eventos** — fundo escuro, accordion 5 itens
+9. **Especializados** — fundo escuro, 2 colunas: Cursos e Treinamentos + Investigação e Inteligência
+10. **Contato** — fundo off-white, grid: info contato + formulário
+11. **Footer** — fundo escuro
 
 > Regra de alternância: seções escuras e off-white se alternam para criar ritmo visual.
 

@@ -67,6 +67,19 @@ nav.scrolled{background:rgba(28,28,30,.97);backdrop-filter:blur(20px);-webkit-ba
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes slideIn{from{opacity:0;transform:translateX(32px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── CLIENTES ESTEIRA ── */
+#clientes{background:#0e0e12;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0;overflow:hidden;position:relative}
+#clientes::before,#clientes::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+#clientes::before{left:0;background:linear-gradient(90deg,#0e0e12,transparent)}
+#clientes::after{right:0;background:linear-gradient(-90deg,#0e0e12,transparent)}
+.clientes-inner{padding:18px 0}
+.marquee-track{display:flex;align-items:center;gap:0;white-space:nowrap;width:max-content;animation:marquee 55s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.cliente-item{display:inline-flex;align-items:center;gap:32px;padding:0 32px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);transition:color .2s;cursor:default;white-space:nowrap}
+.cliente-item:hover{color:var(--muted)}
+.cliente-sep{width:4px;height:4px;background:var(--accent);flex-shrink:0;opacity:.6}
 
 /* ── SECTION LABELS ── */
 .eyebrow{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
@@ -445,6 +458,65 @@ footer{background:linear-gradient(180deg,#1a1a20 0%,#0e0e12 100%);border-top:1px
     <div class="hstat"><div class="hstat-n">24h</div><div class="hstat-l">Cobertura contínua</div></div>
     <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l">Equipe treinada</div></div>
     <div class="hstat"><div class="hstat-n">≤48h</div><div class="hstat-l">Resposta ao orçamento</div></div>
+  </div>
+</section>
+
+<!-- ══ CLIENTES ══ -->
+<section id="clientes" aria-label="Nossos clientes">
+  <div style="text-align:center;padding:28px 0 0;border-bottom:1px solid var(--border)">
+    <span style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2)">Empresas que confiam na Bakos Security</span>
+  </div>
+  <div class="clientes-inner">
+    <div class="marquee-track">
+      <!-- lista original -->
+      <span class="cliente-item">Cilar Imobiliária<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Clínica Cerne<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Concretex<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Crown Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Edson Damiani Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Instituto Gerar<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Maiorca Engenharia<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Ayoshi Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">RP Sistemas<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Velsis<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Tombini Móveis Planejados<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Costa Guerra Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Igreja Adventista<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Poente Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Porto Camargo Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Costa Brava Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Realiza Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Frente Participações<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Cymco Alimentos<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Supermix<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Academia Force One<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Takton Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">ATR Incorporadora<span class="cliente-sep"></span></span>
+      <!-- duplicata para loop contínuo -->
+      <span class="cliente-item">Cilar Imobiliária<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Clínica Cerne<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Concretex<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Crown Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Edson Damiani Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Instituto Gerar<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Maiorca Engenharia<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Ayoshi Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">RP Sistemas<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Velsis<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Tombini Móveis Planejados<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Costa Guerra Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Igreja Adventista<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Poente Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Porto Camargo Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Costa Brava Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Realiza Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Frente Participações<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Cymco Alimentos<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Supermix<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Academia Force One<span class="cliente-sep"></span></span>
+      <span class="cliente-item">Takton Construtora<span class="cliente-sep"></span></span>
+      <span class="cliente-item">ATR Incorporadora<span class="cliente-sep"></span></span>
+    </div>
   </div>
 </section>
 
