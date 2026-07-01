@@ -156,6 +156,32 @@ h2 em{color:var(--accent);font-style:normal}
 .sc.dark .btn-arrow{background:var(--accent)}
 .sc.dark .sc-tag{background:var(--accent);color:#000}
 
+/* card principal — full width, horizontal */
+.sc.featured{grid-column:1/-1;flex-direction:row;border-color:var(--accent);border-width:1px;background:linear-gradient(135deg,#1a1a1f 0%,#222228 100%)}
+.sc.featured .sc-img{width:48%;height:auto;min-height:320px;flex-shrink:0}
+.sc.featured .sc-body{padding:44px 48px;justify-content:center}
+.sc.featured h3{font-size:28px;color:#fff}
+.sc.featured .sc-sub{font-size:14px;color:var(--muted);line-height:1.75}
+.sc.featured .sc-num{color:var(--muted2)}
+.sc.featured .sc-metrics{border-top-color:var(--border)}
+.sc.featured .sc-metric-n{color:#fff;font-size:22px}
+.sc.featured .sc-metric-l{color:var(--muted2)}
+.sc.featured .sc-link{color:var(--muted)}
+.sc.featured .sc-tag{background:var(--accent);color:#000}
+.sc.featured:hover{transform:translateY(-4px);box-shadow:0 16px 56px rgba(245,196,0,.1)}
+/* featured badge */
+.sc-badge{font-size:8px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#000;background:var(--accent);padding:3px 8px;margin-left:10px}
+@media(max-width:840px){
+  .sc.featured{flex-direction:column}
+  .sc.featured .sc-img{width:100%;min-height:240px}
+  .sc.featured .sc-body{padding:28px 28px 24px}
+  .sc.featured h3{font-size:22px}
+}
+@media(max-width:600px){
+  .sc.featured .sc-img{min-height:190px}
+  .sc.featured .sc-body{padding:22px 20px 18px}
+}
+
 /* ────────────────────────────────────────
    SOBRE
 ──────────────────────────────────────── */
@@ -563,6 +589,30 @@ footer{background:linear-gradient(180deg,#1a1a20 0%,#0e0e12 100%);border-top:1px
       <p class="reveal d1">Do controle de acesso à limpeza de ambientes — serviços terceirizados com qualidade, eficiência e custo acessível para condomínios, empresas e indústrias.</p>
     </div>
     <div class="serv-cards">
+
+      <!-- Portaria Remota — DESTAQUE -->
+      <div class="sc featured reveal">
+        <div class="sc-img curtain">
+          <img src="portaria_remota.jpg" alt="Central de Portaria Remota Bakos Security" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;min-height:320px">
+        </div>
+        <div class="sc-body">
+          <div class="sc-top">
+            <span class="sc-num">00 / 04 <span class="sc-badge">Principal</span></span>
+            <span class="sc-tag">Portaria Remota</span>
+          </div>
+          <h3>Portaria Remota</h3>
+          <p class="sc-sub">Toda a segurança de uma portaria profissional, sem a necessidade de presença física constante. A Portaria Remota da Bakos combina monitoramento ativo, controle de acesso e atendimento em tempo real por uma central especializada — reduzindo custos operacionais sem abrir mão da proteção. Ideal para condomínios e empresas que buscam eficiência sem comprometer a segurança.</p>
+          <div class="sc-metrics">
+            <div class="sc-metric"><span class="sc-metric-n">24h</span><span class="sc-metric-l">Central ativa</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Remoto</span><span class="sc-metric-l">Controle de acesso</span></div>
+            <div class="sc-metric"><span class="sc-metric-n">Reduz</span><span class="sc-metric-l">Custo operacional</span></div>
+          </div>
+          <div class="sc-footer">
+            <span class="sc-link">Solicitar orçamento</span>
+            <a href="#contato" class="btn-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg></a>
+          </div>
+        </div>
+      </div>
 
       <!-- Portaria -->
       <div class="sc reveal">
